@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Doctor" (
+CREATE TABLE IF NOT EXISTS "Doctor" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE "Doctor" (
 );
 
 -- CreateTable
-CREATE TABLE "Patient" (
+CREATE TABLE IF NOT EXISTS "Patient" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE "Patient" (
 );
 
 -- CreateTable
-CREATE TABLE "DoctorBookingDiary" (
+CREATE TABLE IF NOT EXISTS "DoctorBookingDiary" (
     "id" SERIAL NOT NULL,
     "doctorId" INTEGER NOT NULL,
     "patientId" INTEGER NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE "DoctorBookingDiary" (
 );
 
 -- CreateTable
-CREATE TABLE "PatientPayment" (
+CREATE TABLE IF NOT EXISTS "PatientPayment" (
     "id" SERIAL NOT NULL,
     "patientId" INTEGER NOT NULL,
     "amount" INTEGER NOT NULL,

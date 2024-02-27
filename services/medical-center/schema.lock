@@ -1,6 +1,95 @@
 [
   {
     "schema": "public",
+    "table": "PatientPayment",
+    "constraints": [
+      {
+        "constraint_catalog": "platformatic",
+        "constraint_schema": "public",
+        "constraint_name": "PatientPayment_pkey",
+        "table_catalog": "platformatic",
+        "table_schema": "public",
+        "table_name": "PatientPayment",
+        "constraint_type": "PRIMARY KEY",
+        "is_deferrable": "NO",
+        "initially_deferred": "NO",
+        "enforced": "YES",
+        "nulls_distinct": null,
+        "column_name": "id",
+        "ordinal_position": 1,
+        "position_in_unique_constraint": null,
+        "foreign_table_name": "PatientPayment",
+        "foreign_column_name": "id",
+        "foreign_table_schema": "public"
+      },
+      {
+        "constraint_catalog": "platformatic",
+        "constraint_schema": "public",
+        "constraint_name": "PatientPayment_patient_payment_id_fkey",
+        "table_catalog": "platformatic",
+        "table_schema": "public",
+        "table_name": "PatientPayment",
+        "constraint_type": "FOREIGN KEY",
+        "is_deferrable": "NO",
+        "initially_deferred": "NO",
+        "enforced": "YES",
+        "nulls_distinct": null,
+        "column_name": "patient_payment_id",
+        "ordinal_position": 1,
+        "position_in_unique_constraint": 1,
+        "foreign_table_name": "Patient",
+        "foreign_column_name": "id",
+        "foreign_table_schema": "public",
+        "loweredTableWithSchemaName": "patientPayment",
+        "foreignEntityName": "patient",
+        "entityName": "patientPayment"
+      }
+    ],
+    "columns": [
+      {
+        "column_name": "id",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "is_generated": "NEVER",
+        "data_type": "integer",
+        "isArray": false
+      },
+      {
+        "column_name": "patientId",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "is_generated": "NEVER",
+        "data_type": "integer",
+        "isArray": false
+      },
+      {
+        "column_name": "amount",
+        "udt_name": "int4",
+        "is_nullable": "NO",
+        "is_generated": "NEVER",
+        "data_type": "integer",
+        "isArray": false
+      },
+      {
+        "column_name": "paymentDate",
+        "udt_name": "timestamp",
+        "is_nullable": "NO",
+        "is_generated": "NEVER",
+        "data_type": "timestamp without time zone",
+        "isArray": false
+      },
+      {
+        "column_name": "patient_payment_id",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "is_generated": "NEVER",
+        "data_type": "integer",
+        "isArray": false
+      }
+    ]
+  },
+  {
+    "schema": "public",
     "table": "versions",
     "constraints": [
       {
@@ -103,15 +192,15 @@
   },
   {
     "schema": "public",
-    "table": "Doctor",
+    "table": "Patient",
     "constraints": [
       {
         "constraint_catalog": "platformatic",
         "constraint_schema": "public",
-        "constraint_name": "Doctor_pkey",
+        "constraint_name": "Patient_pkey",
         "table_catalog": "platformatic",
         "table_schema": "public",
-        "table_name": "Doctor",
+        "table_name": "Patient",
         "constraint_type": "PRIMARY KEY",
         "is_deferrable": "NO",
         "initially_deferred": "NO",
@@ -120,9 +209,31 @@
         "column_name": "id",
         "ordinal_position": 1,
         "position_in_unique_constraint": null,
-        "foreign_table_name": "Doctor",
+        "foreign_table_name": "Patient",
         "foreign_column_name": "id",
         "foreign_table_schema": "public"
+      },
+      {
+        "constraint_catalog": "platformatic",
+        "constraint_schema": "public",
+        "constraint_name": "Patient_assigned_doctor_id_fkey",
+        "table_catalog": "platformatic",
+        "table_schema": "public",
+        "table_name": "Patient",
+        "constraint_type": "FOREIGN KEY",
+        "is_deferrable": "NO",
+        "initially_deferred": "NO",
+        "enforced": "YES",
+        "nulls_distinct": null,
+        "column_name": "assigned_doctor_id",
+        "ordinal_position": 1,
+        "position_in_unique_constraint": 1,
+        "foreign_table_name": "Doctor",
+        "foreign_column_name": "id",
+        "foreign_table_schema": "public",
+        "loweredTableWithSchemaName": "patient",
+        "foreignEntityName": "doctor",
+        "entityName": "patient"
       }
     ],
     "columns": [
@@ -157,20 +268,28 @@
         "is_generated": "NEVER",
         "data_type": "text",
         "isArray": false
+      },
+      {
+        "column_name": "assigned_doctor_id",
+        "udt_name": "int4",
+        "is_nullable": "YES",
+        "is_generated": "NEVER",
+        "data_type": "integer",
+        "isArray": false
       }
     ]
   },
   {
     "schema": "public",
-    "table": "Patient",
+    "table": "Doctor",
     "constraints": [
       {
         "constraint_catalog": "platformatic",
         "constraint_schema": "public",
-        "constraint_name": "Patient_pkey",
+        "constraint_name": "Doctor_pkey",
         "table_catalog": "platformatic",
         "table_schema": "public",
-        "table_name": "Patient",
+        "table_name": "Doctor",
         "constraint_type": "PRIMARY KEY",
         "is_deferrable": "NO",
         "initially_deferred": "NO",
@@ -179,7 +298,7 @@
         "column_name": "id",
         "ordinal_position": 1,
         "position_in_unique_constraint": null,
-        "foreign_table_name": "Patient",
+        "foreign_table_name": "Doctor",
         "foreign_column_name": "id",
         "foreign_table_schema": "public"
       }
@@ -241,6 +360,50 @@
         "foreign_table_name": "DoctorBookingDiary",
         "foreign_column_name": "id",
         "foreign_table_schema": "public"
+      },
+      {
+        "constraint_catalog": "platformatic",
+        "constraint_schema": "public",
+        "constraint_name": "DoctorBookingDiary_patient_book_book_fkey",
+        "table_catalog": "platformatic",
+        "table_schema": "public",
+        "table_name": "DoctorBookingDiary",
+        "constraint_type": "FOREIGN KEY",
+        "is_deferrable": "NO",
+        "initially_deferred": "NO",
+        "enforced": "YES",
+        "nulls_distinct": null,
+        "column_name": "patient_book_book",
+        "ordinal_position": 1,
+        "position_in_unique_constraint": 1,
+        "foreign_table_name": "Patient",
+        "foreign_column_name": "id",
+        "foreign_table_schema": "public",
+        "loweredTableWithSchemaName": "doctorBookingDiary",
+        "foreignEntityName": "patient",
+        "entityName": "doctorBookingDiary"
+      },
+      {
+        "constraint_catalog": "platformatic",
+        "constraint_schema": "public",
+        "constraint_name": "DoctorBookingDiary_doctor_book_id_fkey",
+        "table_catalog": "platformatic",
+        "table_schema": "public",
+        "table_name": "DoctorBookingDiary",
+        "constraint_type": "FOREIGN KEY",
+        "is_deferrable": "NO",
+        "initially_deferred": "NO",
+        "enforced": "YES",
+        "nulls_distinct": null,
+        "column_name": "doctor_book_id",
+        "ordinal_position": 1,
+        "position_in_unique_constraint": 1,
+        "foreign_table_name": "Doctor",
+        "foreign_column_name": "id",
+        "foreign_table_schema": "public",
+        "loweredTableWithSchemaName": "doctorBookingDiary",
+        "foreignEntityName": "doctor",
+        "entityName": "doctorBookingDiary"
       }
     ],
     "columns": [
@@ -283,64 +446,21 @@
         "is_generated": "NEVER",
         "data_type": "timestamp without time zone",
         "isArray": false
-      }
-    ]
-  },
-  {
-    "schema": "public",
-    "table": "PatientPayment",
-    "constraints": [
+      },
       {
-        "constraint_catalog": "platformatic",
-        "constraint_schema": "public",
-        "constraint_name": "PatientPayment_pkey",
-        "table_catalog": "platformatic",
-        "table_schema": "public",
-        "table_name": "PatientPayment",
-        "constraint_type": "PRIMARY KEY",
-        "is_deferrable": "NO",
-        "initially_deferred": "NO",
-        "enforced": "YES",
-        "nulls_distinct": null,
-        "column_name": "id",
-        "ordinal_position": 1,
-        "position_in_unique_constraint": null,
-        "foreign_table_name": "PatientPayment",
-        "foreign_column_name": "id",
-        "foreign_table_schema": "public"
-      }
-    ],
-    "columns": [
-      {
-        "column_name": "id",
+        "column_name": "patient_book_book",
         "udt_name": "int4",
-        "is_nullable": "NO",
+        "is_nullable": "YES",
         "is_generated": "NEVER",
         "data_type": "integer",
         "isArray": false
       },
       {
-        "column_name": "patientId",
+        "column_name": "doctor_book_id",
         "udt_name": "int4",
-        "is_nullable": "NO",
+        "is_nullable": "YES",
         "is_generated": "NEVER",
         "data_type": "integer",
-        "isArray": false
-      },
-      {
-        "column_name": "amount",
-        "udt_name": "int4",
-        "is_nullable": "NO",
-        "is_generated": "NEVER",
-        "data_type": "integer",
-        "isArray": false
-      },
-      {
-        "column_name": "paymentDate",
-        "udt_name": "timestamp",
-        "is_nullable": "NO",
-        "is_generated": "NEVER",
-        "data_type": "timestamp without time zone",
         "isArray": false
       }
     ]
